@@ -1,3 +1,9 @@
-')
+from tkinter import *
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+window = Tk()
+
+window.title("Cylindre de Jefferson")
+
+window.iconbitmap("jef.jpg")
+
+window.mainloop()
