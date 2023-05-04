@@ -4,6 +4,6 @@ window = Tk()
 
 window.title("Cylindre de Jefferson")
 
-window.iconbitmap("jef.jpg")
+window.iconbitmap("th.ico")
 
 window.mainloop()
