@@ -31,3 +31,20 @@ for i in range(len(dictionnaire[1])):
     for j in range(1, len(dictionnaire)+1):
         print(dictionnaire[j][i], end=' ')
     print()
+
+
+def est_permutation(L):
+    # Vérification de la longueur de la liste
+    if len(L) != max(L):
+        return False
+
+    # Vérification des éléments de la liste
+    for i in range(len(L)):
+        if L[i] != i + 1:
+            return False
+
+    # Vérification des entiers compris entre 1 et n
+    if sorted(set(L)) != list(range(1, len(L) + 1)):
+        return False
+
+    return True
