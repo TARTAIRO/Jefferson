@@ -1,9 +1,11 @@
-from tkinter import *
+# Ouvrir le fichier en lecture
+with open("dictionnaire.txt", "r") as f:
+    # Créer une liste contenant chaque ligne du fichier
+    lines = f.readlines()
 
-window = Tk()
+# Créer un dictionnaire avec les lignes du fichier
+dictionnaire = {i+1: lines[i].strip() for i in range(len(lines))}
 
-window.title("Cylindre de Jefferson")
+# Afficher le dictionnaire
+print(dictionnaire)
 
-window.iconbitmap("th.ico")
-
-window.mainloop()
