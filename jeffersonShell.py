@@ -1,5 +1,11 @@
 import random
 
+n = 10  # nombre d'entiers à permuter
+liste_entiers = list(range(1, n+1))  # liste des entiers à permuter
+permutation = random.sample(liste_entiers, n)  # génération de la permutation
+
+print(permutation)  # affichage de la permutation générée
+
 lettres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def generer_ligne():
