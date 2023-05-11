@@ -75,3 +75,82 @@ print(f"Lettre chiffrée de {lettre1} : {lettre_chiffree1}")
 lettre2 = 'B'
 lettre_chiffree2 = chiffrement_lettre(permutation, lettre2)
 print(f"Lettre chiffrée de {lettre2} : {lettre_chiffree2}")
+
+def chiffrement(texte, cylindre, cle):
+    """
+    Chiffrement d'un texte selon l'algorithme de Jefferson.
+
+    Args:
+        texte (str): Le texte à chiffrer.
+        cylindre (dict): Le cylindre sous forme de dictionnaire.
+        cle (list of int): La clé, c'est-à-dire l'ordre des cylindres.
+
+    Returns:
+        str: Le texte chiffré.
+    """
+    # On commence par supprimer les espaces et mettre le texte en majuscules
+    texte = texte.replace(" ", "").upper()
+
+    # On détermine le nombre de cylindres
+    nb_cylindres = len(cle)
+
+    # On découpe le texte en blocs de longueur égale au nombre de cylindres
+    blocs = [texte[i:i + nb_cylindres] for i in range(0, len(texte), nb_cylindres)]
+
+    # On chiffre chaque bloc
+    chiffres = []
+    for bloc in blocs:
+        chiffre = ""
+        for i, lettre in enumerate(bloc):
+            # On récupère le cylindre correspondant à la clé
+            cylindre_idx = cle[i] - 1
+            cyl = cylindre[cylindre_idx + 1]
+
+            # On détermine la position de la lettre dans le cylindre
+            pos_lettre = cyl.index(lettre)
+
+            # On chiffre la lettre en prenant la lettre 6 positions après elle dans le cylindre
+            chiffre += cyl[(pos_lettre + 6) % 26]
+
+        chiffres.append(chiffre)
+
+    # On retourne les blocs chiffrés concaténés en une seule chaîne de caractères
+    return "".join(chiffres)
+
+
+def dechiffrement(texte, cylindre, cle):
+    """
+    Déchiffrement d'un texte selon l'algorithme de Jefferson.
+
+    Args:
+        texte (str): Le texte à déchiffrer.
+        cylindre (dict): Le cylindre sous forme de dictionnaire.
+        cle (list of int): La clé, c'est-à-dire l'ordre des cylindres.
+
+    Returns:
+        str: Le texte déchiffré.
+    """
+    # On détermine le nombre de cylindres
+    nb_cylindres = len(cle)
+
+    # On découpe le texte en blocs de longueur égale au nombre de cylindres
+    blocs = [texte[i:i + nb_cylindres] for i in range(0, len(texte), nb_cylindres)]
+
+    # On déchiffre chaque bloc
+    clairs = []
+    for bloc in blocs:
+        clair = ""
+        for i, lettre in enumerate(bloc):
+            # On récupère le cylindre correspondant à la clé
+            cylindre_idx = cle[i] - 1
+            cyl = cylindre[cylindre_idx + 1]
+
+            # On détermine la position de la lettre chiffrée dans le cylindre
+            pos_chiffre = cyl.index(lettre)
+
+            # On déchiffre la lettre en prenant la lettre 6 positions avant elle dans le cylindre
+            clair += cyl[(pos_chiffre - 6) % 26]
+
+        clairs.append(clair)
+
+    # On
