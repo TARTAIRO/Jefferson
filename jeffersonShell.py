@@ -1,3 +1,4 @@
+
 import random
 
 n = 10  # nombre d'entiers à permuter
@@ -153,4 +154,3 @@ def dechiffrement(texte, cylindre, cle):
 
         clairs.append(clair)
 
-    # On
