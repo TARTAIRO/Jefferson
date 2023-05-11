@@ -54,3 +54,24 @@ def est_permutation(L):
         return False
 
     return True
+
+def chiffrement_lettre(lettre, permutation):
+    """Chiffre une lettre relativement à une permutation donnée."""
+    position = permutation.index(lettre)
+    nouvelle_position = (position + 6) % 26
+    return permutation[nouvelle_position]
+
+def chiffrement_lettre(permutation, lettre):
+    index_lettre = permutation.find(lettre)
+    index_chiffre = (index_lettre + 6) % 26
+    return permutation[index_chiffre]
+
+# Exemple d'utilisation :
+permutation = 'NOZUTWDCVRJLXKISEFAPMYGHBQ'
+lettre1 = 'Z'
+lettre_chiffree1 = chiffrement_lettre(permutation, lettre1)
+print(f"Lettre chiffrée de {lettre1} : {lettre_chiffree1}")
+
+lettre2 = 'B'
+lettre_chiffree2 = chiffrement_lettre(permutation, lettre2)
+print(f"Lettre chiffrée de {lettre2} : {lettre_chiffree2}")
