@@ -10,6 +10,10 @@ print(permutation)  # affichage de la permutation générée
 lettres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def generer_ligne():
+    """
+    Ajouter commentaires
+
+    """
     ligne = ""
     for j in range(26):
         lettre = random.choice(lettres)
@@ -17,6 +21,10 @@ def generer_ligne():
     return ligne
 
 def ecrire_fichier(nom_fichier, n):
+    """
+    Ajouter commentaires
+
+    """
     with open(nom_fichier, "w") as f:
         for i in range(n):
             ligne = generer_ligne()
@@ -41,6 +49,10 @@ for i in range(len(dictionnaire[1])):
 
 
 def est_permutation(L):
+    """
+    Ajouter commentaires
+
+    """
     # Vérification de la longueur de la liste
     if len(L) != max(L):
         return False
@@ -63,6 +75,10 @@ def chiffrement_lettre(lettre, permutation):
     return permutation[nouvelle_position]
 
 def chiffrement_lettre(permutation, lettre):
+    """
+    Ajouter commentaires
+
+    """
     index_lettre = permutation.find(lettre)
     index_chiffre = (index_lettre + 6) % 26
     return permutation[index_chiffre]
@@ -81,13 +97,11 @@ def chiffrement(texte, cylindre, cle):
     """
     Chiffrement d'un texte selon l'algorithme de Jefferson.
 
-    Args:
         texte (str): Le texte à chiffrer.
         cylindre (dict): Le cylindre sous forme de dictionnaire.
         cle (list of int): La clé, c'est-à-dire l'ordre des cylindres.
 
-    Returns:
-        str: Le texte chiffré.
+
     """
     # On commence par supprimer les espaces et mettre le texte en majuscules
     texte = texte.replace(" ", "").upper()
@@ -123,13 +137,9 @@ def dechiffrement(texte, cylindre, cle):
     """
     Déchiffrement d'un texte selon l'algorithme de Jefferson.
 
-    Args:
-        texte (str): Le texte à déchiffrer.
+        texte : Le texte à déchiffrer.
         cylindre (dict): Le cylindre sous forme de dictionnaire.
         cle (list of int): La clé, c'est-à-dire l'ordre des cylindres.
-
-    Returns:
-        str: Le texte déchiffré.
     """
     # On détermine le nombre de cylindres
     nb_cylindres = len(cle)
@@ -154,3 +164,38 @@ def dechiffrement(texte, cylindre, cle):
 
         clairs.append(clair)
 
+
+
+
+
+
+
+# <--------------------------------------- Test------------------------------------------------------------------>
+"""
+def read_file(filename):
+    with open(filename, 'r') as file:
+        return file.read().replace('\n', '')
+
+def substitution_polyalphabetic_cipher(key, plaintext):
+    alphabets = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    ciphertext = ''
+    for letter in plaintext:
+        if letter in alphabets:
+            alphabet_index = key.index(alphabets.index(letter))
+            alphabet = alphabets[alphabet_index]
+            ciphertext += alphabet
+        else:
+            ciphertext += letter
+    return ciphertext
+
+filename = 'cylinderWiki.txt'
+key = [7,9,5,10,1,6,3,8,2,4]
+plaintext = 'Retreat Now'
+
+text = read_file(filename)
+ciphertext = substitution_polyalphabetic_cipher(key, plaintext.upper())
+
+print('Plain text:', plaintext)
+print('Cipher text:', ciphertext)
+
+"""
