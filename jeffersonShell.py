@@ -166,11 +166,40 @@ def dechiffrement(texte, cylindre, cle):
 
 
 
+#<---------------------------Test n2--------------------------------->
 
 
+# Ouvrir le fichier cylinderWiki.txt
+with open('cylinderWiki.txt', 'r') as f:
+    texte_clair = f.read().replace('\n', '')
+
+# Définir la clé
+cle = [7, 9, 5, 10, 1, 6, 3, 8, 2, 4]
 
 
-# <--------------------------------------- Test------------------------------------------------------------------>
+# Fonction de chiffrement
+def chiffrement(texte_clair, cle):
+    # Créer une liste de sous-chaînes à partir du texte clair en utilisant la clé
+    sous_chaines = [texte_clair[i:i + len(cle)] for i in range(0, len(texte_clair), len(cle))]
+
+    # Créer une liste de tuples (sous-chaîne, position) pour chaque lettre dans chaque sous-chaîne
+    lettres = [(sous_chaine[i], i + 1) for sous_chaine in sous_chaines for i in range(len(sous_chaine))]
+
+    # Trier la liste de tuples par position
+    lettres_triees = sorted(lettres, key=lambda x: x[1])
+
+    # Créer une chaîne de caractères à partir des lettres triées
+    texte_chiffre = ''.join([lettre[0] for lettre in lettres_triees])
+
+    return texte_chiffre
+
+
+# Chiffrer la phrase 'Retreat Now' avec la clé donnée
+texte_clair = 'Retreat Now'
+texte_chiffre = chiffrement(texte_clair, cle)
+print(texte_chiffre)  # Output: OMKEGWPDFN
+
+# <--------------------------------------- Test n1 echec------------------------------------------------------------------>
 """
 def read_file(filename):
     with open(filename, 'r') as file:
