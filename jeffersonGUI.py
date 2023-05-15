@@ -56,21 +56,22 @@ def decrypt():
 root = Tk()
 root.title("Chiffrement de Jefferson")
 root.iconbitmap("th.ico")
+root.configure(bg='black')
 
 
 
 # Zone de texte pour le texte à chiffrer/déchiffrer
-input_text = Text(root, height=10, width=50)
-input_text.grid(row=0, column=0, padx=10, pady=10)
+input_text = Text(root, height=10, width=50,  bg='black', fg="red")
+input_text.grid(row=6, column=1, padx=10, pady=10)
 
 # Boutons de chiffrement/déchiffrement
-encrypt_button = Button(root, text="Chiffrer", command=encrypt)
-encrypt_button.grid(row=0, column=1, padx=10, pady=10)
-decrypt_button = Button(root, text="Déchiffrer", command=decrypt)
-decrypt_button.grid(row=0, column=2, padx=10, pady=10)
+encrypt_button = Button(root, text="Chiffrer", command=encrypt, bg='black', fg="red")
+encrypt_button.grid(row=6, column=2, padx=10, pady=10)
+decrypt_button = Button(root, text="Déchiffrer", command=decrypt, bg='black', fg="red")
+decrypt_button.grid(row=7, column=2, padx=10, pady=10)
 
 # Zone de texte pour le résultat
-output_text = Text(root, height=10, width=50)
-output_text.grid(row=1, column=0, columnspan=3, padx=10, pady=10)
+output_text = Text(root, height=10, width=50,  bg='black', fg="red")
+output_text.grid(row=6, column=3, columnspan=3, padx=10, pady=10)
 
 root.mainloop()
