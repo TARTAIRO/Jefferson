@@ -1,38 +1,62 @@
+# Importation de toutes les classes et fonctions de la bibliothèque Tkinter
 from tkinter import *
 
 # Définition de la clé de chiffrement
-key = [4, 2, 1, 5, 3, 7]
+key = [4, 2, 1, 5, 3, 7,9,14]
 
-# Fonction de chiffrement
 def jefferson_cipher(text):
+    """
+     Fonction de chiffrement
+    """
+    # Convertit le texte en majuscules
     text = text.upper()
     ciphered_text = ""
+    # Pour chaque caractère dans le texte
     for i in range(len(text)):
+        # Si le caractère est une lettre
         if text[i].isalpha():
+            # Applique le chiffrement de Jefferson sur la lettre et ajoute le résultat à la chaîne de caractères chiffrés
             ciphered_text += chr(((ord(text[i])-65+key[i%len(key)])%26)+65)
         else:
+            # Si le caractère n'est pas une lettre, l'ajoute tel quel à la chaîne de caractères chiffrés
             ciphered_text += text[i]
+    # Renvoie la chaîne de caractères chiffrés
     return ciphered_text
 
-# Fonction de déchiffrement (inverse du chiffrement)
 def jefferson_decipher(ciphered_text):
+    """
+    Fonction de déchiffrement (inverse du chiffrement)
+    """
     deciphered_text = ""
+    # Pour chaque caractère dans la chaîne de caractères chiffrés
     for i in range(len(ciphered_text)):
+        # Si le caractère est une lettre
         if ciphered_text[i].isalpha():
+            # Applique le déchiffrement de Jefferson sur la lettre et ajoute le résultat à la chaîne de caractères déchiffrés
             deciphered_text += chr(((ord(ciphered_text[i])-65-key[i%len(key)])%26)+65)
         else:
+            # Si le caractère n'est pas une lettre, l'ajoute tel quel à la chaîne de caractères déchiffrés
             deciphered_text += ciphered_text[i]
+    # Renvoie la chaîne de caractères déchiffrés
     return deciphered_text
 
-# Fonction de gestion de l'événement du bouton de chiffrement
 def encrypt():
+    """
+     Fonction de gestion de l'événement du bouton de chiffrement
+    """
+    # Récupère le texte entré par l'utilisateur dans la zone de texte d'entrée
     text = input_text.get("1.0", END).strip()
+    # Applique le chiffrement de Jefferson sur le texte et stocke le résultat dans une variable
     ciphered_text = jefferson_cipher(text)
+    # Efface le contenu de la zone de texte de sortie
     output_text.delete("1.0", END)
+    # Insère le texte chiffré dans la zone de texte de sortie
     output_text.insert("1.0", ciphered_text)
 
-# Fonction de gestion de l'événement du bouton de déchiffrement
 def decrypt():
+    """
+    Fonction de gestion de l'événement du bouton de déchiffrement
+    """
     ciphered_text = input_text.get("1.0", END).strip()
     deciphered_text = jefferson_decipher(ciphered_text)
     output_text.delete("1.0", END)
