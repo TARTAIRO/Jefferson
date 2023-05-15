@@ -166,65 +166,34 @@ def dechiffrement(texte, cylindre, cle):
 
 
 
-#<---------------------------Test n2--------------------------------->
+#<---------------------------Test n1--------------------------------->
+# Ouvrir le fichier contenant le cylindre
+with open('1ARIT-MP.txt') as f:
+    # Lire les lignes du fichier et les stocker dans une liste
+    lines = f.readlines()
+
+# Créer un dictionnaire pour stocker les correspondances de lettres selon le cylindre
+cylinder = {}
+for i in range(len(lines)):
+    # Les lettres sont stockées dans la deuxième colonne de chaque ligne
+    cylinder[lines[i][0]] = lines[i][2:].rstrip()
+
+# Convertir la clé fournie en une liste d'indices à utiliser pour accéder au cylindre
+key = [i-1 for i in [12, 16, 29, 6, 33, 9, 22, 15, 20, 3, 1, 30, 32, 36, 19, 10, 35, 27, 25, 26, 2, 18, 31, 14, 34, 17, 23, 7, 8, 21, 4, 13, 11, 24, 28, 5]]
+
+# Déchiffrer le texte en utilisant le cylindre et la clé
+text = 'GRMYSGBOAAMQGDPEYVWLDFDQQQZXXVMSZFS'
+decoded_text = ''
+for i in range(len(text)):
+    # Trouver la lettre correspondante selon la clé et le cylindre
+    letter = cylinder[text[key[i]][0]][int(text[key[i]][1:])-1]
+    decoded_text += letter
+
+# Afficher le texte déchiffré
+print(decoded_text)
 
 
-# Ouvrir le fichier cylinderWiki.txt
-with open('cylinderWiki.txt', 'r') as f:
-    texte_clair = f.read().replace('\n', '')
-
-# Définir la clé
-cle = [7, 9, 5, 10, 1, 6, 3, 8, 2, 4]
 
 
-# Fonction de chiffrement
-def chiffrement(texte_clair, cle):
-    # Créer une liste de sous-chaînes à partir du texte clair en utilisant la clé
-    sous_chaines = [texte_clair[i:i + len(cle)] for i in range(0, len(texte_clair), len(cle))]
 
-    # Créer une liste de tuples (sous-chaîne, position) pour chaque lettre dans chaque sous-chaîne
-    lettres = [(sous_chaine[i], i + 1) for sous_chaine in sous_chaines for i in range(len(sous_chaine))]
-
-    # Trier la liste de tuples par position
-    lettres_triees = sorted(lettres, key=lambda x: x[1])
-
-    # Créer une chaîne de caractères à partir des lettres triées
-    texte_chiffre = ''.join([lettre[0] for lettre in lettres_triees])
-
-    return texte_chiffre
-
-
-# Chiffrer la phrase 'Retreat Now' avec la clé donnée
-texte_clair = 'Retreat Now'
-texte_chiffre = chiffrement(texte_clair, cle)
-print(texte_chiffre)  # Output: OMKEGWPDFN
-
-# <--------------------------------------- Test n1 echec------------------------------------------------------------------>
-"""
-def read_file(filename):
-    with open(filename, 'r') as file:
-        return file.read().replace('\n', '')
-
-def substitution_polyalphabetic_cipher(key, plaintext):
-    alphabets = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-    ciphertext = ''
-    for letter in plaintext:
-        if letter in alphabets:
-            alphabet_index = key.index(alphabets.index(letter))
-            alphabet = alphabets[alphabet_index]
-            ciphertext += alphabet
-        else:
-            ciphertext += letter
-    return ciphertext
-
-filename = 'cylinderWiki.txt'
-key = [7,9,5,10,1,6,3,8,2,4]
-plaintext = 'Retreat Now'
-
-text = read_file(filename)
-ciphertext = substitution_polyalphabetic_cipher(key, plaintext.upper())
-
-print('Plain text:', plaintext)
-print('Cipher text:', ciphertext)
-
-"""
+# <--------------------------------------- Test n2------------------------------------------------------------------>
